@@ -1,10 +1,7 @@
 # CS151-Library-Management-System
 
-# Team
-Group: Star
-Kousik, Huy, Isiah
-
-# Title: Library Management System
+# Team Star
+Members: Kousik, Huy, Isiah
 
 # Problem
 Looking to make a management system for the library to help it maintain and organize the collection of books found within the library in order to speed up the check-out process. This would not only lessen the burden on librarians but also allow users a much cleaner and easier experience in finding and checking out/in books.
@@ -24,9 +21,7 @@ Customer:
 Check out/in-books
 login?/ Logout
 search for books?(follow title/author/ISBN)
-sort?
 display list of books
-Buy/Borrow/Return books
 History
 
 Admin/Librarian:
@@ -35,7 +30,8 @@ Manage/ Display list of users
 Add or remove users
 Sign-up page (username/ password/email/ phone)
 View Record
-Add/update/remove/Remain quantity books
+Add/update/remove quantity books
+check out/in books
 Bar chart
 
 
