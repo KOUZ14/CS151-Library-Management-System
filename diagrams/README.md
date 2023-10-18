@@ -1,7 +1,7 @@
-Class Diagram
+# Class Diagram
 
-State Diagram
+# State Diagram
 
-Use Case Diagram
+# Use Case Diagram
 
-Sequence Diagram
+# Sequence Diagram
