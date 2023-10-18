@@ -4,4 +4,4 @@
 
 # Use Case Diagram
 
-# Sequence Diagram
+# [Sequence Diagram](https://github.com/KOUZ14/CS151-Library-Management-System/blob/main/diagrams/Sequence%20Diagram.png)
