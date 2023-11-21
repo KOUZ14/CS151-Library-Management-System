@@ -1,7 +1,5 @@
 import javax.swing.*;
-import javax.swing.table.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,11 +8,10 @@ import java.util.ArrayList;
 
 // We defined a class named LibraryManagementGUI that extends JFrame, which is the main window for our GUI.
 public class LibraryManagementGUI extends JFrame {
+
     // We declared instance variables to store lists of books and users, as well as JList components to display these lists in the GUI.
     private ArrayList<String> books = new ArrayList<>();
     private ArrayList<String> users = new ArrayList<>();
-    private JList<Book> bookList;
-    private JList<User> userList;
     private JTable bookTable;
     private JTable userTable;
     private JTable myBookTable;
@@ -69,32 +66,11 @@ public class LibraryManagementGUI extends JFrame {
                     throw new RuntimeException(ex);
                 }
 
-                /*
-                remove(login);
-                add(mainPanel);
-                repaint();
-                revalidate();
-
-                 */
             }
         });
 
         add(login);
 
-        // We created a mainPanel that uses a GridLayout with 2 rows and 3 columns to organize the various components of the GUI
-       // JPanel mainPanel = new JPanel();
-       // mainPanel.setLayout(new GridLayout(2, 3));
-
-        // We created a JList for displaying books and users and configure it for single selection mode. We also wrapped it in a JScrollPanel for scrolling if the list gets long.
-        bookList = new JList<>();
-        bookList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        bookList.setModel(new DefaultListModel<>());
-        //mainPanel.add(new JScrollPane(bookList));
-
-        userList = new JList<>();
-        userList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        userList.setModel(new DefaultListModel<>());
-        //mainPanel.add(new JScrollPane(userList));
 
         bookTable = new JTable();
         bookTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -103,6 +79,7 @@ public class LibraryManagementGUI extends JFrame {
         DefaultTableModel dtm = new DefaultTableModel(0, 0);
         dtm.setColumnIdentifiers(header);
         bookTable.setModel(dtm);
+        bookTable.setDefaultEditor(Object.class, null);
 
         userTable = new JTable();
         userTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -110,6 +87,7 @@ public class LibraryManagementGUI extends JFrame {
         DefaultTableModel dtm1 = new DefaultTableModel(0, 0);
         dtm1.setColumnIdentifiers(header1);
         userTable.setModel(dtm1);
+        userTable.setDefaultEditor(Object.class, null);
 
         myBookTable = new JTable();
         myBookTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -117,6 +95,7 @@ public class LibraryManagementGUI extends JFrame {
         DefaultTableModel dtm2 = new DefaultTableModel(0, 0);
         dtm2.setColumnIdentifiers(header2);
         myBookTable.setModel(dtm2);
+        myBookTable.setDefaultEditor(Object.class, null);
 
         updateUserList();
         updateBookList();
@@ -136,6 +115,9 @@ public class LibraryManagementGUI extends JFrame {
 
         JButton viewMyBooks = new JButton("My Books");
         mainPanel.add(viewMyBooks);
+
+        JButton logoutButton = new JButton("Logout");
+        mainPanel.add(logoutButton);
 
 
         viewBookButton.addActionListener(new ActionListener() {
@@ -162,10 +144,30 @@ public class LibraryManagementGUI extends JFrame {
                             int column = 0;
                             int row = bookTable.getSelectedRow();
                             String val = bookTable.getModel().getValueAt(row, column).toString();
-                            if (library.checkStatus(Integer.parseInt(val))) {
-                                user.checkOutBook(Integer.parseInt(val));
-                                updateBookList();
-                                updateMyBookList();
+                            try {
+                                if (library.checkStatus(Integer.parseInt(val))) {
+                                    try {
+                                        if(!user.status()) {
+                                            throw new OverdueFullException("You owe too many books");
+                                        }
+                                        else {
+                                            user.checkOutBook(Integer.parseInt(val));
+                                            updateBookList();
+                                            updateMyBookList();
+                                        }
+                                    } catch(OverdueFullException em) {
+                                        String temp1 = em.getMessage();
+                                        JOptionPane.showMessageDialog(null, temp1);
+                                    }
+                                }
+                                else {
+                                    throw new BookCheckedOutException("Book is unavailable");
+
+                                }
+                            }
+                            catch (BookCheckedOutException ex) {
+                                String temp = ex.getMessage();
+                                JOptionPane.showMessageDialog(null, temp);
                             }
                         }
                         else {
@@ -174,6 +176,7 @@ public class LibraryManagementGUI extends JFrame {
                     }
                 });
                 bookButtons.add(checkout);
+
                 JButton removeBook = new JButton("Remove Book");
                 removeBook.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -224,7 +227,7 @@ public class LibraryManagementGUI extends JFrame {
                 JLabel l3 = new JLabel("ISBN:");
                 l3.setBounds(20, 130, 80, 30);
                 JButton b = new JButton("Add Book");
-                b.setBounds(100, 240, 80, 30);
+                b.setBounds(100, 240, 100, 30);
                 final JTextField text = new JTextField();
                 text.setBounds(100, 20, 100, 30);
                 final JTextField text1 = new JTextField();
@@ -247,6 +250,17 @@ public class LibraryManagementGUI extends JFrame {
                 d.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 b.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        try{
+                            for(char c : text2.getText().toCharArray()) {
+                                if(!Character.isDigit(c)) {
+                                    throw new IsbnNumException("Input only digits");
+                                }
+                            }
+                        }
+                        catch(IsbnNumException en) {
+                            String temp3 = en.getMessage();
+                            JOptionPane.showMessageDialog(null, temp3);
+                        }
                         Book bookValue = new Book();
                         bookValue.setTitle(text.getText());
                         bookValue.setAuthor(text1.getText());
@@ -318,12 +332,12 @@ public class LibraryManagementGUI extends JFrame {
                 JDialog d = new JDialog(getOwner(), "Add User");
                 final JPasswordField value = new JPasswordField();
                 value.setBounds(100, 75, 100, 30);
-                JLabel l1 = new JLabel("User Name:");
+                JLabel l1 = new JLabel("Name:");
                 l1.setBounds(20, 20, 80, 30);
                 JLabel l2 = new JLabel("Password:");
                 l2.setBounds(20, 75, 80, 30);
                 JButton b = new JButton("Add User");
-                b.setBounds(100, 130, 80, 30);
+                b.setBounds(100, 130, 100, 30);
                 final JTextField text = new JTextField();
                 text.setBounds(100, 20, 100, 30);
                 d.add(l1);
@@ -331,6 +345,7 @@ public class LibraryManagementGUI extends JFrame {
                 d.add(value);
                 d.add(b);
                 d.add(text);
+
                 d.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 d.setSize(300, 300);
                 d.setLocationRelativeTo(null);
@@ -339,14 +354,21 @@ public class LibraryManagementGUI extends JFrame {
                 d.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
                 b.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
+                        try{
+                            ValidatePassword.isValid(new String(value.getPassword()));
+                        } catch (PasswordException ex) {
+                            String temp = ex.getMessage();
+                            JOptionPane.showMessageDialog(null, temp);
+                            throw new RuntimeException(ex);
+                        }
                         User userVal = new User();
                         userVal.setName(text.getText());
                         userVal.setPassword(value.getPassword());
                         library.addUser(userVal);
                         userVal.setUserID(library.getUID(userVal.getName(), String.valueOf(userVal.getPassword())));
-                        JOptionPane.showMessageDialog(null, userVal.getUserID());
                         updateUserList();
                         d.dispose();
+                        JOptionPane.showMessageDialog(null, userVal.getUserID());
                     }
                 });
                 d.setVisible(true);
@@ -405,9 +427,23 @@ public class LibraryManagementGUI extends JFrame {
             }
         });
 
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                remove(mainPanel);
+                remove(login);
+                text.setText("");
+                value.setText("");
+                add(login);
+                repaint();
+                revalidate();
+            }
+        });
 
         setVisible(true);
     }
+
+
 
     private void updateBookList() {
         DefaultTableModel dtm = (DefaultTableModel) bookTable.getModel();
