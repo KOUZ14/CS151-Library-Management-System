@@ -110,6 +110,35 @@ public class User implements Serializable {
             }
         }
     }
+
+    public boolean status() {
+        Connection conn = null;
+        try {
+            conn = Library.conn();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("USE libsystest");
+            PreparedStatement ps = conn.prepareStatement("SELECT count(UID) FROM ISSUED WHERE UID =?");
+            ps.setInt(1, getUserID());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()) {
+                if(rs.getInt(1) > 5) {
+                    return false;
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return true;
+    }
     //For this method need to make file for checkout history
    // public void getCheckoutHistory(){}
 
