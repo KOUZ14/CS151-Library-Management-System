@@ -24,6 +24,12 @@ Looking to make a management system for the library to help it maintain and orga
 # Assumptions, Op Env, Intended Usage
 We will be using Java Swing for the GUI, Java OOP for our back-end, exception handling for edge cases, and MySQL to store/retrieve data 
 
+# Diagrams
+Class Diagram: https://github.com/KOUZ14/CS151-Library-Management-System/blob/main/diagrams/Class%20Diagram.png  
+Sequence Diagram: https://github.com/KOUZ14/CS151-Library-Management-System/blob/main/diagrams/Sequence%20Diagram.png  
+State Diagram: https://github.com/KOUZ14/CS151-Library-Management-System/blob/main/diagrams/State%20Diagram.png  
+Use Case Diagram: https://github.com/KOUZ14/CS151-Library-Management-System/blob/main/diagrams/Use%20Case%20Diagram.png  
+
 # High-Level Description
 We plan to have three classes (Book, Library, User) that will keep track of book data(a.k.a titles, ISBN, Brand (courses), etc.), User information(name, etc.), and books and users found within the library. With all of this data, we also need a place to store it. We will be using files(or databases) in order to store and retrieve all of this data. In addition to this, we will also utilize exception handling, in order to catch edge cases such as a user trying to request a book that is not available. In order for these features to then be palatable to the general user, we will use Java Swing to make our GUI. This will include actions like retrieving/storing books, displaying a list of books within the library, etc. (Login?).
 

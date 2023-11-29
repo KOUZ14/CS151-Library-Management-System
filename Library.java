@@ -251,7 +251,20 @@ public class Library implements Serializable {
         return false;
     }
     public static Connection conn() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "password");
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("MySQL JDBC Driver not found", e);
+        }
+
+        String url = "jdbc:mysql://localhost:3306/libsystest?user=root&password=password1&servertimezone=UTC&encrypt=false";
+
+        try {
+            return DriverManager.getConnection(url);
+        } catch (SQLException e) {
+            // Log the exception details or handle it according to your application's needs
+            throw new RuntimeException("Error establishing a database connection", e);
+        }
     }
 
     public static void create() {
