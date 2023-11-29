@@ -4,18 +4,18 @@
 Members: Kousik, Huy, Isiah
 
 # Proposal Contributions
-Kousik: Designed the class diagram and use case diagrams. Formatted the README file using MarkDown and added edits to it.
-Huy: Helped Isiah and Kousik with designing the all the diagrams and revised proposal.
+Kousik: Designed the class diagram and use case diagrams. Formatted the README file using MarkDown and added edits to it.  
+Huy: Helped Isiah and Kousik with designing the all the diagrams and revised proposal.  
 Isiah: Designed Sequence and State Diagram. Wrote down majority of our ideas on to readme file.
 
 # Presentation Contributions
-Kousik: Started out by giving run through demo of project and explained gui features and answered questions about format and why main panel was able to readjust to size and not login panel.
-Huy: Described a list of book library components as well as how library searching works. Explained how it works in creating usernames, passwords, and how it works in the library. Answered questions about class designs.
+Kousik: Started out by giving run through demo of project and explained gui features and answered questions about format and why main panel was able to readjust to size and not login panel.  
+Huy: Described a list of book library components as well as how library searching works. Explained how it works in creating usernames, passwords, and how it works in the library. Answered questions about class designs.  
 Isiah: Gave some more details about the program, explained the how the database works and how it interacts with other parts of the program. Answered questions about the database.
 
 # Project(Code) and Report Contributions
-Kousik: Designed majority of the GUI such as main panel, dialogs, tables. Set up code for easy integration with the database. Used a GridLayout for the main panel to have a nice balanced layout. Incorporated Jlist components within a Jscroll in case the list gets long. Created all the necessary Jbuttons and implemented actionlistener for each action. Made a GitHub repository and formatted the report into README file.
-Huy: Made the custom exceptions as well as the backend classes. Create a username and password that allows users to access the application. Users can use their accounts to perform functions in the application such as: looking up the list of books, borrowing books, and checking out. The username can be set to any desired user, unless it matches an existing username; However, the password must be set according to specific requirements for security as well as duplication with other accounts. Handle exception-related issues such as: book existence, search with incorrect title, author name, or ISBN. Requirements related to password security must ensure not to be the same, special characters, numbers, and so on. Searches in the library will be checked using a "true/false" form, which allows checking the accuracy of the search.
+Kousik: Designed majority of the GUI such as main panel, dialogs, tables. Set up code for easy integration with the database. Used a GridLayout for the main panel to have a nice balanced layout. Incorporated Jlist components within a Jscroll in case the list gets long. Created all the necessary Jbuttons and implemented actionlistener for each action. Made a GitHub repository and formatted the report into README file.  
+Huy: Made the custom exceptions as well as the backend classes. Create a username and password that allows users to access the application. Users can use their accounts to perform functions in the application such as: looking up the list of books, borrowing books, and checking out. The username can be set to any desired user, unless it matches an existing username; However, the password must be set according to specific requirements for security as well as duplication with other accounts. Handle exception-related issues such as: book existence, search with incorrect title, author name, or ISBN. Requirements related to password security must ensure not to be the same, special characters, numbers, and so on. Searches in the library will be checked using a "true/false" form, which allows checking the accuracy of the search.  
 Isiah: Made the mysql database and tables within it by using a jdbc connector. I was able to code these elements within the project itself. Made the methods to interact with said database(retrieving and storing data) and connected everything to work with the database(things like what to do with the resultset from the database).
 
 # Problem
