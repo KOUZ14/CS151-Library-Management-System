@@ -3,16 +3,26 @@
 # Team Star
 Members: Kousik, Huy, Isiah
 
-# Contributions
-Kousik: Built the majority of the GUI.
-Huy: Helped build a portion of the GUI and made the custom exceptions as well as the backend classes.
-Isiah: Built the mysql database, the majority of the Library class and connected everything to the database.
+# Proposal Contributions
+Kousik: Designed the class diagram and use case diagrams. Formatted the README file using MarkDown and added edits to it.
+Huy: Helped Isiah and Kousik with designing the all the diagrams and revised proposal.
+Isiah: Designed Sequence and State Diagram. Wrote down majority of our ideas on to readme file.
+
+# Presentation Contributions
+Kousik: Started out by giving run through demo of project and explained gui features and answered questions about format and why main panel was able to readjust to size and not login panel.
+Huy: Described a list of book library components as well as how library searching works. Explained how it works in creating usernames, passwords, and how it works in the library. Answered questions about class designs.
+Isiah: Gave some more details about the program, explained the how the database works and how it interacts with other parts of the program. Answered questions about the database.
+
+# Project(Code) and Report Contributions
+Kousik: Designed majority of the GUI such as main panel, dialogs, tables. Set up code for easy integration with the database. Used a GridLayout for the main panel to have a nice balanced layout. Incorporated Jlist components within a Jscroll in case the list gets long. Created all the necessary Jbuttons and implemented actionlistener for each action. Made a GitHub repository and formatted the report into README file.
+Huy: Made the custom exceptions as well as the backend classes. Create a username and password that allows users to access the application. Users can use their accounts to perform functions in the application such as: looking up the list of books, borrowing books, and checking out. The username can be set to any desired user, unless it matches an existing username; However, the password must be set according to specific requirements for security as well as duplication with other accounts. Handle exception-related issues such as: book existence, search with incorrect title, author name, or ISBN. Requirements related to password security must ensure not to be the same, special characters, numbers, and so on. Searches in the library will be checked using a "true/false" form, which allows checking the accuracy of the search.
+Isiah: Made the mysql database and tables within it by using a jdbc connector. I was able to code these elements within the project itself. Made the methods to interact with said database(retrieving and storing data) and connected everything to work with the database(things like what to do with the resultset from the database).
 
 # Problem
 Looking to make a management system for the library to help it maintain and organize the collection of books found within the library in order to speed up the check-out process. This would not only lessen the burden on librarians but also allow users a much cleaner and easier experience in finding and checking out/in books.
 
 # Assumptions, Op Env, Intended Usage
-We will be using Java Swing for the GUI, Java OOP for our back-end, exception handling for edge cases, and File I/O(Database?) to store/retrieve data 
+We will be using Java Swing for the GUI, Java OOP for our back-end, exception handling for edge cases, and MySQL to store/retrieve data 
 
 # High-Level Description
 We plan to have three classes (Book, Library, User) that will keep track of book data(a.k.a titles, ISBN, Brand (courses), etc.), User information(name, etc.), and books and users found within the library. With all of this data, we also need a place to store it. We will be using files(or databases) in order to store and retrieve all of this data. In addition to this, we will also utilize exception handling, in order to catch edge cases such as a user trying to request a book that is not available. In order for these features to then be palatable to the general user, we will use Java Swing to make our GUI. This will include actions like retrieving/storing books, displaying a list of books within the library, etc. (Login?).
@@ -24,8 +34,7 @@ Our solution would allow many users to check out books at once without there nee
 
 Customer:
 Check out/in-books
-login?/ Logout
-search for books?(follow title/author/ISBN)
+Login/ Logout
 display list of books
 
 Admin/Librarian:
@@ -36,7 +45,6 @@ Sign-up page (username/ password/email/ phone)
 View Record
 Add/update/remove quantity books
 check out/in books
-Bar chart
 
 #Steps to Run Code
 1. mysql-connector-j-8.2.0.jar should already be in the executable jar but may need to add that to file path
